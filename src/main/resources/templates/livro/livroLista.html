@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+	<title>Biblioteca Spring</title>
+
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/vendors.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/algaworks.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/layout/stylesheets/application.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/brewer.css}"/>
+	<link rel="shortcut icon" th:href="@{/images/favicon.png}"/>
+</head>
+
+<body>
+
+<div class="aw-layout-page">
+	<nav class="navbar  navbar-fixed-top  navbar-default  js-sticky-reference" id="main-navbar">
+		<div class="container-fluid">
+
+	    <div class="navbar-header">
+	     	<a class="navbar-brand  hidden-xs" href="#">
+	        	<img alt="Biblioteca Spring" src="/images/logo.png"/>
+	      	</a>
+
+	      	<ul class="nav  navbar-nav">
+	        	<li>
+	          		<a href="#" class="js-sidebar-toggle"><i class="fa  fa-bars"></i></a>
+	        	</li>
+	      	</ul>
+	    </div>
+	    
+	     	<ul class="nav navbar-nav  navbar-right">
+		    	<li>
+		        	<a th:href="@{/logout}"><em class="fa  fa-sign-out"></em>sair</a>
+				</li> 
+	    	</ul>
+	  </div>
+	</nav>
+	
+	<aside class="aw-layout-sidebar  js-sidebar">
+		<div class="aw-layout-sidebar__content">
+
+	    	<nav class="aw-menu  js-menu">
+	      		<ul class="aw-menu__list">
+	
+	        		<li class="aw-menu__item  is-active">
+	          			<a href="#">
+	            			<i class="fa  fa-fw  fa-file-text"></i><span>Navegação</span>
+	            			<i class="aw-menu__navigation-icon  fa"></i>
+	          			</a>
+	      
+	          			<ul class="aw-menu__list  aw-menu__list--sublist">
+				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/autor}">Cadastrar Autor</a></li>
+				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/editora}">Autores Cadastrados</a></li>
+				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/editora}">Cadastrar Editora</a></li>
+				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/editoras}">Editoras Cadastradas</a></li>
+				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/livro}">Cadastrar Livro</a></li>
+				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/}">Home</a></li>
+	          			</ul>
+	        		</li>
+	      		</ul>
+	    	</nav>
+		</div>
+	</aside>
+	
+<section class="aw-layout-content  js-content">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<h1>
+				ACERVO
+			</h1>
+		</div>
+	</div>
+
+		
+			
+	<div class="row" th:each="livro: ${listagemLivros.livros}">
+				<div class="col-sm-1  form-group">
+					<div><label th:text="${livro.id}"/></div>
+				</div>
+				<div class="col-sm-1  form-group">
+					<div><label th:text="${livro.titulo}"/></div>
+				</div>
+				<div class="col-sm-1  form-group">
+					<div><label th:text="${livro.genero}"/></div>
+				</div>
+				<div class="col-sm-1  form-group">
+					<div><label th:text="${livro.edicao}"/></div>
+				</div>
+				
+				<div class="col-sm-1  form-group">
+					<div><label th:text="${livro.ano}"/></div>
+				</div>
+				
+				<div class="col-sm-1  form-group">
+					<div><label th:text="${livro.autor.nome}"/></div>
+				</div>
+				
+				<div class="col-sm-1  form-group">
+					<div><label th:text="${livro.editora.nome}"/></div>
+				</div>
+				
+						
+				<div class="col-sm-1  form-group">
+			 		<form th:action="@{/biblioteca/apagarlivro/{id}(id = ${livro.id})}" th:method="POST">
+					<button class="btn  btn-primary" type="submit">APAGAR</button>
+					</form>
+				</div>	
+				
+				<div class="col-sm-1  form-group">
+			 		<form th:action="@{/biblioteca/editarlivro/{id}(id = ${livro.id})}" th:method="POST">
+					<button class="btn  btn-primary" type="submit">EDITAR</button>
+					</form>
+				</div>	
+	</div>
+</div>
+
+</section>
+
+	<footer class="aw-layout-footer  js-content">
+		<div class="container-fluid">
+			<span class="aw-footer-disclaimer">&copy;Biblioteca Spring---Since 2022.</span>
+		</div>
+	</footer>
+</div>	
+
+<script src="/layout/javascripts/vendors.min.js"></script>
+<script src="/layout/javascripts/algaworks.min.js"></script>
+</body>
+</html>
