@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -44,10 +46,11 @@ public class LivroController{
 	//FORMULÁRIO VAZIO
 	
 	@GetMapping(value = "/livro")
-	public ModelAndView showForm(Livro livro) {
+	public ModelAndView showForm(Livro livro, @AuthenticationPrincipal User user) {
 		ModelAndView mv = new ModelAndView("livro/livroForm");
 		List<Autor> autor = autorService.listar();
 		List<Editora> editora = editoraService.listar();
+		mv.addObject("usuario", user.getUsername());
 		mv.addObject("autor", autor);
 		mv.addObject("editora", editora );
 		
@@ -57,11 +60,10 @@ public class LivroController{
 	//PREENCHER
 	@PostMapping({"/livro","\\+{d}"})
 	public ModelAndView novoLivro(@Validated Livro livro, BindingResult bindingResult, Model model,
-			RedirectAttributes attributes, HttpServletRequest httpServletRequest) {
+			RedirectAttributes attributes, HttpServletRequest httpServletRequest, @AuthenticationPrincipal User user) {
 		
 		if(bindingResult.hasErrors()) {
-			System.out.println("erro: " + bindingResult.toString());
-			return showForm(livro);
+			return showForm(livro, user);
 		}
 		livroService.salvar(livro);
 	return new ModelAndView("redirect:");
@@ -70,7 +72,8 @@ public class LivroController{
 	//LISTAR
 	
 	@GetMapping("/livros")
-	public String listagemLivros(@ModelAttribute("listagemLivros") ModelMap model) {
+	public String listagemLivros(@ModelAttribute("listagemLivros") ModelMap model, @AuthenticationPrincipal User user, Model modell) {
+		modell.addAttribute("usuario", user.getUsername());
 		List<Livro> recebe = livroService.listar();
 		model.addAttribute("livros", recebe);
 	return "livro/livroLista";
@@ -86,9 +89,9 @@ public class LivroController{
 	 }
 	
 	@PostMapping("/editarlivro/{id}")
-	 public ModelAndView editarLivroPorId(@PathVariable Long id, ModelMap model) {
+	 public ModelAndView editarLivroPorId(@PathVariable Long id, ModelMap model, @AuthenticationPrincipal User user) {
 		Livro livro = livroService.carregar(id);
-		ModelAndView livroEditar = showForm(livro);
+		ModelAndView livroEditar = showForm(livro, user);
 		model.addAttribute(livro);
 		return livroEditar;
 	 }

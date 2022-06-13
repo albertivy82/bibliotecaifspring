@@ -4,7 +4,6 @@ package com.servicos.biblioteca.controller;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,7 +16,6 @@ public class Homecontroller{
 		model.addAttribute("usuario", user);
 		if(user!=null) {
 			model.addAttribute("usuario", user);
-			System.out.println("resultado" + user.getUsername());
 			return "redirect:/";
 		}
 	return "login";

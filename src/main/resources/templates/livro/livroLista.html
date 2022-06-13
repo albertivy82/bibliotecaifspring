@@ -31,6 +31,12 @@
 	          		<a href="#" class="js-sidebar-toggle"><i class="fa  fa-bars"></i></a>
 	        	</li>
 	      	</ul>
+	      	
+	      	<ul class="nav navbar-nav">
+		    	<li>
+		    	  <a>Usuário atual:  <span th:text="${usuario}"></span></a>
+				</li> 
+	    	</ul>
 	    </div>
 	    
 	     	<ul class="nav navbar-nav  navbar-right">
@@ -77,6 +83,32 @@
 		</div>
 	</div>
 
+<div class="row">
+				<div class="col-sm-1  form-group">
+					<div><label>ID</label></div>
+				</div>
+				<div class="col-sm-1  form-group">
+					<div><label>TÍTULO</label></div>
+				</div>
+				<div class="col-sm-1  form-group">
+					<div><label>GÊNERO</label></div>
+				</div>
+				<div class="col-sm-1  form-group">
+					<div><label>EDIÇÃO</label></div>
+				</div>
+				
+				<div class="col-sm-1  form-group">
+					<div><label>ANO</label></div>
+				</div>
+				
+				<div class="col-sm-1  form-group">
+					<div><label>AUTOR</label></div>
+				</div>
+				
+				<div class="col-sm-1  form-group">
+					<div><label>EDITORA</label></div>
+				</div>
+	</div>
 		
 			
 	<div class="row" th:each="livro: ${listagemLivros.livros}">

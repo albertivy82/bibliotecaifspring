@@ -31,6 +31,11 @@
 	          		<a href="#" class="js-sidebar-toggle"><i class="fa  fa-bars"></i></a>
 	        	</li>
 	      	</ul>
+	      	<ul class="nav navbar-nav">
+		    	<li>
+		    	  <a>Usuário atual:  <span th:text="${usuario}"></span></a>
+				</li> 
+	    	</ul>
 	    </div>
 	     <ul class="nav navbar-nav  navbar-right">
 		    	<li>
@@ -54,7 +59,7 @@
 	      
 	          			<ul class="aw-menu__list  aw-menu__list--sublist">
 				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/autor}">Cadastrar Autor</a></li>
-				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/editora}">Autores Cadastrados</a></li>
+				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/lista}">Autores Cadastrados</a></li>
 				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/editora}">Cadastrar Editora</a></li>
 				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/livro}">Cadastrar Livro</a></li>
 				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/livros}">Livros Cadastrados</a></li>
@@ -76,6 +81,17 @@
 		</div>
 	</div>
 
+	<div class="row">
+				<div class="col-sm-1  form-group">
+					<div><label>ID</label></div>
+				</div>
+				<div class="col-sm-2  form-group">
+					<div><label>EDITORA</label></div>
+				</div>
+				<div class="col-sm-2  form-group">
+					<div><label>SEDE</label></div>
+				</div>
+	</div>
 		
 			
 	<div class="row" th:each="editora: ${listagemEditoras.editoras}">

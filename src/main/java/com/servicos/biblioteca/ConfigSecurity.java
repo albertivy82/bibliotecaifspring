@@ -38,7 +38,11 @@ public class ConfigSecurity extends WebSecurityConfigurerAdapter {
 	}
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		auth.inMemoryAuthentication().withUser("LEITOR").password(passwordEncoder().encode("password")).authorities("user");
+		auth.inMemoryAuthentication()
+		.withUser("LEITOR").password(passwordEncoder().encode("leitor")).authorities("user")
+		.and()
+		.withUser("PESQUISADOR").password(passwordEncoder().encode("pesquisador"))
+		.authorities("user");
 	}
 	
 	

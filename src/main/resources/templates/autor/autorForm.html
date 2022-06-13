@@ -23,19 +23,27 @@
 
 	    <div class="navbar-header">
 	     	<a class="navbar-brand  hidden-xs" href="#">
-	        	<img alt="Biblioteca Spring" src="/images/logo.png"/>
-	      	</a>
+	     		<img alt="Biblioteca Spring" src="/images/logo.png"/>
+	       	</a>
 
 	      	<ul class="nav  navbar-nav">
 	        	<li>
 	          		<a href="#" class="js-sidebar-toggle"><i class="fa  fa-bars"></i></a>
 	        	</li>
 	      	</ul>
+	      	
+	      	<ul class="nav navbar-nav">
+		    	<li>
+		    	  <a>Usuário atual:  <span th:text="${usuario}"></span></a>
+				</li> 
+	    	</ul>
 	    </div>
+	    
+	     
 	    
 	     <ul class="nav navbar-nav  navbar-right">
 		    	<li>
-		        	<a th:href="@{/logout}"><em class="fa  fa-sign-out"></em>sair</a>
+		    	   <a th:href="@{/logout}"><em class="fa  fa-sign-out"></em>sair</a>
 				</li> 
 	    </ul>
 	  </div>
@@ -56,7 +64,7 @@
 	          			<ul class="aw-menu__list  aw-menu__list--sublist">
 				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/lista}">Autores Cadastrados</a></li> <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/editora}">Cadastrar Editora</a></li>
 				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/editora}">Cadastrar Editora</a></li>
-				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/autoras}">Editoras Cadastradas</a></li>
+				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/editoras}">Editoras Cadastradas</a></li>
 				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/livro}">Cadastrar Livro</a></li>
 				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/biblioteca/livros}">Livros Cadastrados</a></li>
 				            <li class="aw-menu__item  aw-menu__item--link"><a th:href="@{/}">Home</a></li>

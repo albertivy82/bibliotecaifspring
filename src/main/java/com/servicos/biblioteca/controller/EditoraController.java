@@ -8,7 +8,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +35,9 @@ public class EditoraController{
 	//FORMULÁRIO VAZIO
 	
 	@GetMapping(value = "/editora")
-	public String showForm(Editora editora) {
-	return "editora/editoraForm";
+	public String showForm(Editora editora, @AuthenticationPrincipal User user, ModelMap model) {
+		model.addAttribute("usuario", user.getUsername());
+		return "editora/editoraForm";
 	}
 	
 	
@@ -41,7 +45,6 @@ public class EditoraController{
 	public String novaEditora(@Valid Editora editora,BindingResult bindingResult) {
 		
 		if(bindingResult.hasErrors()) {
-			System.out.println("erro: " + bindingResult.toString());
 			return "editora/editoraForm";
 		}
 		editoraService.salvar(editora);
@@ -51,9 +54,11 @@ public class EditoraController{
 	//LISTAR
 	
 	@GetMapping("/editoras")
-	public String listagemEditores(@ModelAttribute("listagemEditoras") ModelMap model) {
+	public String listagemEditores(@ModelAttribute("listagemEditoras") ModelMap model, @AuthenticationPrincipal User user, Model modell) {
 		List<Editora> recebe = editoraService.listar();
+		modell.addAttribute("usuario", user.getUsername());
 		model.addAttribute("editoras", recebe);
+		
 	return "editora/editoraLista";
 	}
 	 
